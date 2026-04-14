@@ -38,8 +38,13 @@ local function item_signals(signals)
 end
 
 local function get_stop_network(stop)
-  return stop.get_circuit_network(defines.wire_connector_id.circuit_red, defines.circuit_connector_id.combinator_input)
-    or stop.get_circuit_network(defines.wire_connector_id.circuit_green, defines.circuit_connector_id.combinator_input)
+  if defines.wire_connector_id then
+    return stop.get_circuit_network(defines.wire_connector_id.circuit_red)
+      or stop.get_circuit_network(defines.wire_connector_id.circuit_green)
+  end
+
+  return stop.get_circuit_network(defines.wire_type.red)
+    or stop.get_circuit_network(defines.wire_type.green)
 end
 
 local function station_snapshot(stop)
